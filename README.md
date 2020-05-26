@@ -1,28 +1,26 @@
 # **CodeToAny**：**一个**微信公众号网页授权给**任何**域名下的url
 把从微信网页授权接口中获取到的`授权code`以get参数的形式传递给**任何**域名下的url。
 
-## 联系作者
-* 进淘宝店[乐享良品网站开发][1]使用阿里旺旺即时通讯（可能是有偿服务）；
-* 在[CodeToAny主页][2]留言；
-* 关注[新浪微博][3]和[腾讯微博][4]；
-* 在[CodeToAny源码页][5]留言；
+[原git地址][1]
 
-## 打赏捐赠
-如果您觉得本程序不错，欢迎打赏我给予小小的支持，谢过！![谢谢][6]![卖萌][7]
+# 二次调整
 
-![支付宝二维码][8]　　　　![微信二维码][9]
+在源码基础上自己做了一些优化与调整，自己项目是作为多个域名的授权中转使用，突破微信自身的授权域名数量限制
 
-## 成功案例
-微擎、微赞、discuz插件、wordpress插件
+多个域名均使用一个微公号授权，都通过此中转
+
+* 单独封装出配置文件`config.php`
+* 支持H5站的跳转（按需使用）
 
 ## 环境需求
 * php >= 5.4.0（小于5.4.0的情况可以联系作者解决）；
 
 ## 极速使用
-1. 假设将网页授权回调域名设置为`www.test.com`；
-2. 编辑`codetoany/getcode.php`，将变量`$appId`的值修改为自己的`微信公众号AppId`；
-3. 将文件夹codetoany中的所有文件部署到`http://www.test.com/codetoany/`；
-4. 在微信内或使用微信web开发者工具访问`http://www.test.com/codetoany/getcode.php?auk=demo1`，顺利的话，页面将跳转到类似这样的url：`http://lionsay.com/?abc=123&code=0318PVx00bTFzB1JOny00YMRx008PVxS&state=STATE`；
+
+1. 假设打算通过`www.test.com`域名（其域名已设置为网页授权回调域名）作为其他域名（paperen.com）站点的中转；
+2. 编辑`config.php`，将变量`appid`的值修改为自己的`微信公众号AppId`；
+3. 将`config.php`的`wx`部分修改`test`键值为`http://a.com`；
+4. 在微信内或使用微信web开发者工具访问`http://www.test.com/?auk=test`，顺利的话，页面将跳转到类似这样的url：`http://paperen.com/?abc=123&code=0318PVx00bTFzB1JOny00YMRx008PVxS&state=STATE`；
 
 ## 攻略指南
 1. `?auk=demo1`中的`auk`、`demo1`以及此时的`授权url`（即接收`授权code`的url，最终跳转的url）都是可以自定义的；
@@ -30,20 +28,4 @@
 3. 除了get参数`auk`外，传递给`codetoany/getcode.php`的任何get参数都会以get参数的形式再传递给`授权url`；
 4. 如果网页授权回调域名使用`https`协议访问，那么程序需要略微调整才可以正常使用；
 
-## 郑重声明
-* 本程序仅供学习研究使用，不得用于非法用途，否则后果自负；
-* 对于由本程序导致的一切法律和安全问题，作者不承担任何责任；
-
-[1]: <https://enjoylion.taobao.com> "提供网站开发与维护的有偿服务"
-[2]: <http://lionsay.com/codetoany.html> "博客：一派良言"
-[3]: <http://weibo.com/236127789/>
-[4]: <http://t.qq.com/lionskys/>
-[5]: <https://github.com/weixin-lion/codetoany/issues/> "托管于github"
-[6]: <http://lionsay.com/asset/image/face/qq/woshou.png> "谢谢"
-[7]: <http://lionsay.com/asset/image/face/qq/huaixiao.png> "卖萌"
-[8]: <asset/image/qrcode_alipay_230_253.jpg> "支付宝扫一扫打赏"
-[9]: <asset/image/qrcode_weixin_230_253.jpg> "微信扫一扫打赏"
-
-<!--
-简述（用于搜索）：微信公众号平台网页授权接口中获取到的授权code传递给（即一个微信公众号网页授权给）任何其他多个回调域名下的url，解决了只能设置一个网页授权回调域名的问题，解决了redirect_uri参数错误的问题。
--->
+[1]: <https://github.com/lionskys/codetoany> "代码源"
